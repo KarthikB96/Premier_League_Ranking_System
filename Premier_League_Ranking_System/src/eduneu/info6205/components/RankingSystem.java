@@ -154,13 +154,35 @@ public class RankingSystem {
 		
 		for(int i=0;i<goalArray.length;i++) {
 			for(int j=0;j<goalArray[0].length;j++) {
-				goalArray[i][j]= poissonDistributionAway.probability(i)*poissonDistributionHome.probability(j);
+				goalArray[i][j]= (poissonDistributionAway.probability(i)*poissonDistributionHome.probability(j))*100;
 			}
 		}
 		
 		for(double[] row: goalArray) {
 		System.out.println(Arrays.toString(row));
 		}
+		
+		double homeTeamProbability = 0;
+		for(int i=0;i<goalArray.length;i++) {
+			for(int j=i+1;j<goalArray[0].length;j++) {
+				homeTeamProbability+=goalArray[i][j];
+			}
+		}
+		
+		double drawProbability=0;
+		for(int i=0;i<goalArray[0].length;i++) {
+			drawProbability+=goalArray[i][i];
+		}
+		
+		double awayTeamProbability=0;
+		for(int j=0;j<goalArray[0].length;j++) {
+			for(int i=j+1;i<goalArray.length;i++) {
+				awayTeamProbability+=goalArray[i][j];
+			}
+		}
+		
+		System.out.println(homeTeam.getName()+" winProbability: "+homeTeamProbability+" draw Probability:"
+				+ " "+drawProbability+" "+awayTeam.getName()+" away Team Probability: "+awayTeamProbability);
 		
 	}
 	

@@ -9,7 +9,7 @@ public class Driver {
 		//Poisson.demo();
 		RankingSystem rankingSystem = new RankingSystem();
 		rankingSystem.Initilize();
-		rankingSystem.predict("Man City", "Chelsea");
+		rankingSystem.predict("Chelsea", "Liverpool");
 	}
 
 }
