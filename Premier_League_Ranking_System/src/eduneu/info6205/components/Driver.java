@@ -6,7 +6,10 @@ public class Driver {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		RankingSystem.Initilize();
+		//Poisson.demo();
+		RankingSystem rankingSystem = new RankingSystem();
+		rankingSystem.Initilize();
+		rankingSystem.predict("Man City", "Chelsea");
 	}
 
 }

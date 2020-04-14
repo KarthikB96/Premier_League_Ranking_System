@@ -2,23 +2,24 @@ package eduneu.info6205.components;
 
 public class Club {
 	private String name;
-	public double AttackHomeForm;
-	public double AttackAwayForm;
-	public double DefenceHomeForm;
-	public double DefenceAwayForm;
-	public int homeGoals;
-	public int awayGoals;
-	public int homeConceded;
-	public int awayConceded;
+//	public double AttackHomeForm=0;
+//	public double AttackAwayForm=0;
+//	public double DefenceHomeForm=0;
+//	public double DefenceAwayForm=0;
+	public double homeMatchesPlayed=0;
+	public double awayMatchesPlayed=0;
+	public double homeGoals=0;
+	public double awayGoals=0;
+	public double homeConceded=0;
+	public double awayConceded=0;
+	public double homeShotsOnTarget=0;
+	public double awayShotsOnTarget=0;
+	public double homeRedCards=0;
+	public double awayRedCards=0;
 	
-	
-	public Club(String name, double attackHomeForm, double attackAwayForm, double defenceHomeForm,double defenceAwayForm) {
+	public Club(String name) {
 		super();
 		this.name = name;
-		AttackHomeForm = attackHomeForm;
-		AttackAwayForm = attackAwayForm;
-		DefenceHomeForm = defenceHomeForm;
-		DefenceAwayForm = defenceAwayForm;
 	}
 	
 	public String getName() {
@@ -27,30 +28,16 @@ public class Club {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double getAttackHomeForm() {
-		return AttackHomeForm;
+
+	@Override
+	public String toString() {
+		return "Club [name=" + name + ", homeMatchesPlayed=" + homeMatchesPlayed + ", awayMatchesPlayed="
+				+ awayMatchesPlayed + ", homeGoals=" + homeGoals + ", awayGoals=" + awayGoals + ", homeConceded="
+				+ homeConceded + ", awayConceded=" + awayConceded + ", homeShotsOnTarget=" + homeShotsOnTarget
+				+ ", awayShotsOnTarget=" + awayShotsOnTarget + ", homeRedCards=" + homeRedCards + ", awayRedCards="
+				+ awayRedCards + "]";
 	}
-	public void setAttackHomeForm(double attackHomeForm) {
-		AttackHomeForm = attackHomeForm;
-	}
-	public double getAttackAwayForm() {
-		return AttackAwayForm;
-	}
-	public void setAttackAwayForm(double attackAwayForm) {
-		AttackAwayForm = attackAwayForm;
-	}
-	public double getDefenceHomeForm() {
-		return DefenceHomeForm;
-	}
-	public void setDefenceHomeForm(double defenceHomeForm) {
-		DefenceHomeForm = defenceHomeForm;
-	}
-	public double getDefenceAwayForm() {
-		return DefenceAwayForm;
-	}
-	public void setDefenceAwayForm(double defenceAwayForm) {
-		DefenceAwayForm = defenceAwayForm;
-	}
+	
 	
 	
 }
