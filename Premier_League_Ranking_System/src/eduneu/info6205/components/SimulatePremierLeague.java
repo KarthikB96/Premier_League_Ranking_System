@@ -51,12 +51,11 @@ public class SimulatePremierLeague {
 		
 		for(String teams : fileUtil.readFile(fixtures)) {
 			String[] args = teams.split(",");
-			System.out.println(args[0] +" vs "+args[1]);
 			double[] prediction=rankingSystem.predict(args[0], args[1]);  //homeTeamProbability,drawProbability,awayTeamProbability,Home Result,Away Result
 			
 			int homeResult = (int)prediction[3];
 			int awayResult = (int)prediction[4];
-				
+			System.out.println(args[0] +" vs "+args[1]+" :predicted score: "+homeResult+"-"+awayResult);
 			String homeTeamString = args[0];
 			String awayTeamString = args[1];
 			ClubRow homeRow = tableMap.get(homeTeamString);
