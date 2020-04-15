@@ -27,13 +27,13 @@ public class RankingSystem {
 		FileUtil fileUtil = new FileUtil();
 		
 		List<String> fileList = new ArrayList<>();
-		String filePath1 = "./csv/2014-2015.csv" ;
+		//String filePath1 = "./csv/2014-2015.csv" ;
 		String filePath2 = "./csv/2015-2016.csv" ;
 		String filePath3 = "./csv/2016-2017.csv" ;
 		String filePath4 = "./csv/2017-2018.csv" ;
 		String filePath5 = "./csv/2018-2019.csv" ;
 		String filePath6 = "./csv/2019-2020.csv" ;
-		fileList.add(filePath1);
+		//fileList.add(filePath1);
 		fileList.add(filePath2);
 		fileList.add(filePath3);
 		fileList.add(filePath4);
@@ -115,8 +115,8 @@ public class RankingSystem {
 		Club homeTeam = clubMap.get(homeTeamString);
 		Club awayTeam = clubMap.get(awayTeamString);
 		
-		System.out.println(homeTeam.toString());
-		System.out.println(awayTeam.toString());
+//		System.out.println(homeTeam.toString());
+//		System.out.println(awayTeam.toString());
 		
 		double homeTeamGoals = homeTeam.homeGoals;
 		double homeTeamGames = homeTeam.homeMatchesPlayed;
@@ -135,9 +135,9 @@ public class RankingSystem {
 		double DefenceFormOfAwayTeam = (awayTeamGoalsConceded/awayTeamGames)/totalAwayDefenceStrength;
 		
 		double homeTeamForm = AttackFormOfHomeTeam * DefenceFormOfAwayTeam * totalHomeAttackStrength;
-		System.out.println("Home Form: "+homeTeamForm);
+//		System.out.println("Home Form: "+homeTeamForm);
 		double awayTeamForm = AttackFormOfAwayTeam * DefenceFormOfHomeTeam * totalAwayAttackStrength;
-		System.out.println("Away Form: "+awayTeamForm);
+//		System.out.println("Away Form: "+awayTeamForm);
 		
 		
 		PoissonDistribution poissonDistributionHome = new PoissonDistribution(homeTeamForm);
@@ -154,13 +154,13 @@ public class RankingSystem {
 		
 		for(int i=0;i<goalArray.length;i++) {
 			for(int j=0;j<goalArray[0].length;j++) {
-				goalArray[i][j]= (poissonDistributionAway.probability(i)*poissonDistributionHome.probability(j))*100;
+				goalArray[i][j]= (poissonDistributionAway.probability(i)*poissonDistributionHome.probability(j))*100; //Getting Probability in terms of percentage
 			}
 		}
 		
-		for(double[] row: goalArray) {
-		System.out.println(Arrays.toString(row));
-		}
+//		for(double[] row: goalArray) {
+//		System.out.println(Arrays.toString(row));
+//		}
 		
 		double homeTeamProbability = 0;
 		for(int i=0;i<goalArray.length;i++) {

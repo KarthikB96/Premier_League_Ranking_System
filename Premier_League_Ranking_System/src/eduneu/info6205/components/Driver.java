@@ -7,9 +7,11 @@ public class Driver {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//Poisson.demo();
-		RankingSystem rankingSystem = new RankingSystem();
-		rankingSystem.Initilize();
-		rankingSystem.predict("Chelsea", "Liverpool");
+//		RankingSystem rankingSystem = new RankingSystem();
+//		rankingSystem.Initilize();
+//		rankingSystem.predict("Bournemouth", "Liverpool");
+		
+		SimulatePremierLeague.simulate();
 	}
 
 }
