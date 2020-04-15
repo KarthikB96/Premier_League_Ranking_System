@@ -111,7 +111,11 @@ public class RankingSystem {
 		System.out.println("Succesfully Initialized "+ totalHomeAttackStrength);
 	}
 	
-	public void predict(String homeTeamString, String awayTeamString) {
+	//Output is the win probability,draw probabilty and loss probability in a double array
+	//homeTeamProbability,drawProbability,awayTeamProbability,Home Result,Away Result
+	public double[] predict(String homeTeamString, String awayTeamString) {
+		int maxResultRow = 0;
+		int maxResultColumn = 0;
 		Club homeTeam = null;
 		Club awayTeam = null;
 		
@@ -119,14 +123,14 @@ public class RankingSystem {
 			homeTeam = clubMap.get(homeTeamString);
 		}
 		catch(Exception e) {
-			return;
+			return null;
 		}
 		
 		try {
 			awayTeam = clubMap.get(awayTeamString);
 		}
 		catch(Exception e) {
-			return;
+			return null;
 		}
 		
 		
@@ -173,6 +177,18 @@ public class RankingSystem {
 			}
 		}
 		
+		double temp=0;
+		//Finding the maximum probability
+		for(int i=0;i<goalArray.length;i++) {
+			for(int j=0;j<goalArray[0].length;j++) {
+				if(goalArray[i][j]>temp) {
+					temp=goalArray[i][j];
+					maxResultRow = i;
+					maxResultColumn = j;
+				}
+			}
+		}
+		
 //		for(double[] row: goalArray) {
 //		System.out.println(Arrays.toString(row));
 //		}
@@ -197,8 +213,12 @@ public class RankingSystem {
 			}
 		}
 		
-		System.out.println(homeTeam.getName()+" winProbability: "+homeTeamProbability+" draw Probability:"
-				+ " "+drawProbability+" "+awayTeam.getName()+" away Team Probability: "+awayTeamProbability);
+//		System.out.println(homeTeam.getName()+" winProbability: "+homeTeamProbability+" draw Probability:"
+//				+ " "+drawProbability+" "+awayTeam.getName()+" away Team Probability: "+awayTeamProbability);
+		
+		double[] prediction = {homeTeamProbability,drawProbability,awayTeamProbability,maxResultColumn,maxResultRow};
+		
+		return prediction;
 		
 	}
 	
