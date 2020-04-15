@@ -112,8 +112,23 @@ public class RankingSystem {
 	}
 	
 	public void predict(String homeTeamString, String awayTeamString) {
-		Club homeTeam = clubMap.get(homeTeamString);
-		Club awayTeam = clubMap.get(awayTeamString);
+		Club homeTeam = null;
+		Club awayTeam = null;
+		
+		try {
+			homeTeam = clubMap.get(homeTeamString);
+		}
+		catch(Exception e) {
+			return;
+		}
+		
+		try {
+			awayTeam = clubMap.get(awayTeamString);
+		}
+		catch(Exception e) {
+			return;
+		}
+		
 		
 //		System.out.println(homeTeam.toString());
 //		System.out.println(awayTeam.toString());
@@ -161,6 +176,7 @@ public class RankingSystem {
 //		for(double[] row: goalArray) {
 //		System.out.println(Arrays.toString(row));
 //		}
+		
 		
 		double homeTeamProbability = 0;
 		for(int i=0;i<goalArray.length;i++) {
