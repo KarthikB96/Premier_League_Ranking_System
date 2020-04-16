@@ -6,23 +6,28 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import eduneu.info6205.components.ClubRow;
 
 public class FileUtil {
 	//creating a file and writing into the file
-//	public void createFile(List<String> persons,String fileName) {
-//		try {
-//			FileWriter fileWriter = new FileWriter(fileName);
-//			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
-//			for(String s : persons) {
-//				bufferWriter.write(s);
-//				bufferWriter.newLine();
-//			}
-//			bufferWriter.flush();
-//			}
-//			catch(Exception e) {
-//				e.printStackTrace();
-//			}
-//	}
+	public void createFile(List<Map.Entry<String, ClubRow>> finalTable) {
+		try {
+			FileWriter fileWriter = new FileWriter("./csv/Final_League_Table.csv");
+			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
+			int rank=1;
+			for(Map.Entry<String, ClubRow> entry: finalTable) {
+				bufferWriter.write(rank+","+entry.getValue().toString());
+				rank++;
+				bufferWriter.newLine();
+			}
+			bufferWriter.flush();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+	}
 	//reading the file
 	public List<String> readFile(String fileName) {
 		List<String> studentString = new ArrayList<String>();

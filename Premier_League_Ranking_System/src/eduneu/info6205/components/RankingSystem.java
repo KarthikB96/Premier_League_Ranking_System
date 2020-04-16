@@ -180,7 +180,7 @@ public class RankingSystem {
 		}
 		
 		//finding the top 3 probabilities
-		double[] prediction  = new double[6];  //{maxHomeResult1,maxAwayResult1,maxHomeResult2,maxAwayResult2,maxHomeResult3,maxAwayResult3}
+		double[] prediction  = new double[9];  //{maxHomeResult1,maxAwayResult1,maxHomeResult2,maxAwayResult2,maxHomeResult3,maxAwayResult3}
 		
 		for(int i=0;i<prediction.length;i+=2) {
 			double probability = probabilities.poll();
@@ -188,6 +188,9 @@ public class RankingSystem {
 			for(int j=0;j<goalArray.length;j++) {
 				for(int k=0;k<goalArray[0].length;k++) {
 					if(goalArray[j][k]==probability) {
+						if(i>=6) {
+							break;
+						}
 						prediction[i]=k;
 						prediction[i+1]=j;
 					}
@@ -232,9 +235,11 @@ public class RankingSystem {
 			}
 		}
 		
-		System.out.println(homeTeam.getName()+" winProbability: "+homeTeamProbability+" draw Probability:"
-				+ " "+drawProbability+" "+awayTeam.getName()+" away Team Probability: "+awayTeamProbability);
-		
+//		System.out.println(homeTeam.getName()+" winProbability: "+homeTeamProbability+" draw Probability:"
+//				+ " "+drawProbability+" "+awayTeam.getName()+" away Team Probability: "+awayTeamProbability);
+		prediction[6]=homeTeamProbability;
+		prediction[7]=drawProbability;
+		prediction[8]=awayTeamProbability;
 //		double[] prediction = {homeTeamProbability,drawProbability,awayTeamProbability,maxResultColumn,maxResultRow};
 		
 		return prediction;

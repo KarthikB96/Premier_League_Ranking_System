@@ -60,14 +60,15 @@ public class SimulatePremierLeague {
 		
 		for(String teams : fileUtil.readFile(fixtures)) {
 			String[] args = teams.split(",");
-			System.out.println(args[0] +" vs "+args[1]+" :");
 			double[] prediction=rankingSystem.predict(args[0], args[1]);  //{maxHomeResult1,maxAwayResult1,maxHomeResult2,maxAwayResult2,maxHomeResult3,maxAwayResult3}
 			
 			
 			//considering the score with highest probability
 			int homeResult = (int)prediction[0];
 			int awayResult = (int)prediction[1];
-			System.out.println(args[0] +" vs "+args[1]+" :predicted scores: "+" first: "+homeResult+"-"+awayResult+" second: "+(int)prediction[2]+"-"+(int)prediction[3]+" third: "+(int)prediction[4]+"-"+(int)prediction[5]);
+			System.out.println(args[0] +" vs "+args[1]+": Home Team winProbability: "+prediction[6]+" draw Probability:"
+					+ " "+prediction[7]+"  away Team WinProbability: "+prediction[8]);
+			System.out.println(" predicted scores: "+" first: "+homeResult+"-"+awayResult+" second: "+(int)prediction[2]+"-"+(int)prediction[3]+" third: "+(int)prediction[4]+"-"+(int)prediction[5]);
 			String homeTeamString = args[0];
 			String awayTeamString = args[1];
 			ClubRow homeRow = tableMap.get(homeTeamString);
@@ -145,6 +146,10 @@ public class SimulatePremierLeague {
 			@Override
 			public int compare(Entry<String, ClubRow> o1, Entry<String, ClubRow> o2) {
 				// TODO Auto-generated method stub
+				int result=Integer.compare(o2.getValue().getPoints(),o1.getValue().getPoints());
+				if(result==0) {
+					return Integer.compare(o2.getValue().getGoalDifference(),o1.getValue().getGoalDifference());
+				}
 				return Integer.compare(o2.getValue().getPoints(),o1.getValue().getPoints());
 			}
 			
@@ -154,6 +159,8 @@ public class SimulatePremierLeague {
 		List<Map.Entry<String, ClubRow>> finalTable = finalTableSet.stream().collect(Collectors.toList());
 		Collections.sort(finalTable,comparator);
 		
+		//creating a csv file to store the final league table
+		fileUtil.createFile(finalTable);
 		//printing the table
 		for(Map.Entry<String, ClubRow> entry: finalTable) {
 			System.out.println(entry.getValue().toString());
