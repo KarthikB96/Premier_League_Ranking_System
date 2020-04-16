@@ -3,10 +3,11 @@ package eduneu.info6205.components;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.PriorityQueue;
 
 import org.apache.commons.math3.distribution.PoissonDistribution;
 
@@ -112,7 +113,7 @@ public class RankingSystem {
 	}
 	
 	//Output is the win probability,draw probabilty and loss probability in a double array
-	//homeTeamProbability,drawProbability,awayTeamProbability,Home Result,Away Result
+	//output format:[homeTeamProbability,drawProbability,awayTeamProbability,Home Result,Away Result]
 	public double[] predict(String homeTeamString, String awayTeamString) {
 		int maxResultRow = 0;
 		int maxResultColumn = 0;
@@ -168,27 +169,45 @@ public class RankingSystem {
 //		}
 		
 		double[][] goalArray = new double[6][6];
-		
+		PriorityQueue<Double> probabilities = new PriorityQueue<Double>(Collections.reverseOrder());
 		//considering each row to be away team goal chances and home team to be columns
 		
 		for(int i=0;i<goalArray.length;i++) {
 			for(int j=0;j<goalArray[0].length;j++) {
 				goalArray[i][j]= (poissonDistributionAway.probability(i)*poissonDistributionHome.probability(j))*100; //Getting Probability in terms of percentage
+				probabilities.add(goalArray[i][j]);
 			}
 		}
 		
-		double temp=0;
-		//Finding the maximum probability
-		for(int i=0;i<goalArray.length;i++) {
-			for(int j=0;j<goalArray[0].length;j++) {
-				if(goalArray[i][j]>temp) {
-					temp=goalArray[i][j];
-					maxResultRow = i;
-					maxResultColumn = j;
+		//finding the top 3 probabilities
+		double[] prediction  = new double[6];  //{maxHomeResult1,maxAwayResult1,maxHomeResult2,maxAwayResult2,maxHomeResult3,maxAwayResult3}
+		
+		for(int i=0;i<prediction.length;i+=2) {
+			double probability = probabilities.poll();
+			//Finding the maximum probability
+			for(int j=0;j<goalArray.length;j++) {
+				for(int k=0;k<goalArray[0].length;k++) {
+					if(goalArray[j][k]==probability) {
+						prediction[i]=k;
+						prediction[i+1]=j;
+					}
 				}
 			}
 		}
 		
+//		double temp=0;
+//		//Finding the maximum probability
+//		for(int i=0;i<goalArray.length;i++) {
+//			for(int j=0;j<goalArray[0].length;j++) {
+//				if(goalArray[i][j]>temp) {
+//					temp=goalArray[i][j];
+//					maxResultRow = i;
+//					maxResultColumn = j;
+//				}
+//			}
+//		}
+		
+		//printing the probability matrix
 //		for(double[] row: goalArray) {
 //		System.out.println(Arrays.toString(row));
 //		}
@@ -213,10 +232,10 @@ public class RankingSystem {
 			}
 		}
 		
-//		System.out.println(homeTeam.getName()+" winProbability: "+homeTeamProbability+" draw Probability:"
-//				+ " "+drawProbability+" "+awayTeam.getName()+" away Team Probability: "+awayTeamProbability);
+		System.out.println(homeTeam.getName()+" winProbability: "+homeTeamProbability+" draw Probability:"
+				+ " "+drawProbability+" "+awayTeam.getName()+" away Team Probability: "+awayTeamProbability);
 		
-		double[] prediction = {homeTeamProbability,drawProbability,awayTeamProbability,maxResultColumn,maxResultRow};
+//		double[] prediction = {homeTeamProbability,drawProbability,awayTeamProbability,maxResultColumn,maxResultRow};
 		
 		return prediction;
 		

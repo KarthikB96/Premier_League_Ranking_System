@@ -1,7 +1,13 @@
 package eduneu.info6205.components;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import fileParser.FileUtil;
 
@@ -37,6 +43,9 @@ public class SimulatePremierLeague {
 			
 			tableMap.put(name, club);
 		}
+//		for(Map.Entry<String, ClubRow> entry: tableMap.entrySet()) {
+//			System.out.println(entry.getValue().toString());
+//		}
 	}
 	
 	
@@ -51,11 +60,14 @@ public class SimulatePremierLeague {
 		
 		for(String teams : fileUtil.readFile(fixtures)) {
 			String[] args = teams.split(",");
-			double[] prediction=rankingSystem.predict(args[0], args[1]);  //homeTeamProbability,drawProbability,awayTeamProbability,Home Result,Away Result
+			System.out.println(args[0] +" vs "+args[1]+" :");
+			double[] prediction=rankingSystem.predict(args[0], args[1]);  //{maxHomeResult1,maxAwayResult1,maxHomeResult2,maxAwayResult2,maxHomeResult3,maxAwayResult3}
 			
-			int homeResult = (int)prediction[3];
-			int awayResult = (int)prediction[4];
-			System.out.println(args[0] +" vs "+args[1]+" :predicted score: "+homeResult+"-"+awayResult);
+			
+			//considering the score with highest probability
+			int homeResult = (int)prediction[0];
+			int awayResult = (int)prediction[1];
+			System.out.println(args[0] +" vs "+args[1]+" :predicted scores: "+" first: "+homeResult+"-"+awayResult+" second: "+(int)prediction[2]+"-"+(int)prediction[3]+" third: "+(int)prediction[4]+"-"+(int)prediction[5]);
 			String homeTeamString = args[0];
 			String awayTeamString = args[1];
 			ClubRow homeRow = tableMap.get(homeTeamString);
@@ -67,7 +79,7 @@ public class SimulatePremierLeague {
 				//home team has won
 				
 				//setting home team table
-				homeRow.setGoalsFired(homeRow.getGoalsAcquired()+homeResult);
+				homeRow.setGoalsFired(homeRow.getGoalsFired()+homeResult);
 				homeRow.setGoalsAcquired(homeRow.getGoalsAcquired()+awayResult);
 				homeRow.setPoints(homeRow.getPoints()+3);
 				homeRow.setWon(homeRow.getWon()+1);
@@ -128,9 +140,22 @@ public class SimulatePremierLeague {
 				tableMap.put(awayTeamString,awayRow);
 			}
 		}
+		Comparator<Map.Entry<String, ClubRow>> comparator = new Comparator<Map.Entry<String, ClubRow>>() {
+
+			@Override
+			public int compare(Entry<String, ClubRow> o1, Entry<String, ClubRow> o2) {
+				// TODO Auto-generated method stub
+				return Integer.compare(o2.getValue().getPoints(),o1.getValue().getPoints());
+			}
+			
+		};
+		
+		Set<Map.Entry<String, ClubRow>> finalTableSet = tableMap.entrySet(); 
+		List<Map.Entry<String, ClubRow>> finalTable = finalTableSet.stream().collect(Collectors.toList());
+		Collections.sort(finalTable,comparator);
 		
 		//printing the table
-		for(Map.Entry<String, ClubRow> entry: tableMap.entrySet()) {
+		for(Map.Entry<String, ClubRow> entry: finalTable) {
 			System.out.println(entry.getValue().toString());
 		}
 	}
