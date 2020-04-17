@@ -1,6 +1,6 @@
 Steps to run the application.
 1. The Driver Class with the main function.
-2. All csv files are under the csv folder.
+2. All csv files are under the csv folder. Current Premier league table is in PremierLeague_Table.csv and the upcoming fixtures are in Fixtures.csv.
 3. Club class is used to hold the create teams that is used for prediction,.
 4. ClubRow class is used to create team objects that represent each row in the premier league table.
 
