@@ -7,12 +7,13 @@ public class Driver {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//Poisson.demo();
-		
+
+		//Simulate a particular match
 //		RankingSystem rankingSystem = new RankingSystem();
 //		rankingSystem.Initilize();
 //		rankingSystem.predict("Man United", "Man City");
 		
-//		SimulatePremierLeague.simulate();
+
 		SimulatePremierLeague league = new SimulatePremierLeague();
 		league.initialize();
 		league.simulate();

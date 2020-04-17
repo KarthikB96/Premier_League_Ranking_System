@@ -49,14 +49,10 @@ public class RankingSystem {
 				String awayTeam = args[1];
 				double homeTeamGoals = Integer.parseInt(args[2]);
 				double awayTeamGoals = Integer.parseInt(args[3]);
-				double homeTeamShots = Integer.parseInt(args[4]);
-				double awayTeamShots = Integer.parseInt(args[5]);
-				double homeTeamShotsTarget = Integer.parseInt(args[6]);
-				double awayTeamShotsTarget = Integer.parseInt(args[7]);
-				double homeFouls = Integer.parseInt(args[8]);
-				double awayFouls = Integer.parseInt(args[9]);
-				double homeRedCard = Integer.parseInt(args[10]);
-				double awayRedCard = Integer.parseInt(args[11]);
+				double homeTeamShotsTarget = Integer.parseInt(args[4]);
+				double awayTeamShotsTarget = Integer.parseInt(args[5]);
+				double homeRedCard = Integer.parseInt(args[6]);
+				double awayRedCard = Integer.parseInt(args[7]);
 				
 				totalHomeGoals+=homeTeamGoals;
 				totalAwayGoals+=awayTeamGoals;
