@@ -49,10 +49,6 @@ public class RankingSystem {
 				String awayTeam = args[1];
 				double homeTeamGoals = Integer.parseInt(args[2]);
 				double awayTeamGoals = Integer.parseInt(args[3]);
-				double homeTeamShotsTarget = Integer.parseInt(args[4]);
-				double awayTeamShotsTarget = Integer.parseInt(args[5]);
-				double homeRedCard = Integer.parseInt(args[6]);
-				double awayRedCard = Integer.parseInt(args[7]);
 				
 				totalHomeGoals+=homeTeamGoals;
 				totalAwayGoals+=awayTeamGoals;
@@ -62,8 +58,6 @@ public class RankingSystem {
 					Club club = new Club(homeTeam);
 					club.homeGoals += homeTeamGoals;
 					club.homeConceded += awayTeamGoals;
-					club.homeShotsOnTarget += homeTeamShotsTarget;
-					club.homeRedCards += homeRedCard;
 					club.homeMatchesPlayed+=1;
 					clubMap.put(homeTeam,club);
 				}
@@ -71,8 +65,6 @@ public class RankingSystem {
 					Club club = clubMap.get(homeTeam);
 					club.homeGoals += homeTeamGoals;
 					club.homeConceded += awayTeamGoals;
-					club.homeShotsOnTarget += homeTeamShotsTarget;
-					club.homeRedCards += homeRedCard;
 					club.homeMatchesPlayed+=1;
 					clubMap.put(homeTeam,club);
 				}
@@ -82,8 +74,6 @@ public class RankingSystem {
 					Club club = new Club(awayTeam);
 					club.awayGoals += awayTeamGoals;
 					club.awayConceded += homeTeamGoals;
-					club.awayShotsOnTarget += awayTeamShotsTarget;
-					club.awayRedCards += awayRedCard;
 					club.awayMatchesPlayed+=1;
 					clubMap.put(awayTeam,club);
 				}
@@ -91,8 +81,6 @@ public class RankingSystem {
 					Club club = clubMap.get(awayTeam);
 					club.awayGoals += awayTeamGoals;
 					club.awayConceded += homeTeamGoals;
-					club.awayShotsOnTarget += awayTeamShotsTarget;
-					club.awayRedCards += awayRedCard;
 					club.awayMatchesPlayed+=1;
 					clubMap.put(awayTeam,club);
 				}
