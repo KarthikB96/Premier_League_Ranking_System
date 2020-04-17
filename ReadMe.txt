@@ -1,6 +1,8 @@
 Steps to run the application.
 1. The Driver Class with the main function.
 2. All csv files are under the csv folder.
+3. Club class is used to hold the create teams that is used for prediction,.
+4. ClubRow class is used to create team objects that represent each row in the premier league table.
 
 Simulaing the Premier League:
 1. To simulate the premier league and get the table we use the SimulatePremierLeague class.
