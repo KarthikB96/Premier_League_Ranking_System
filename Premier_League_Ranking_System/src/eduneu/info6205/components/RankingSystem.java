@@ -164,7 +164,7 @@ public class RankingSystem {
 		}
 		
 		//finding the top 3 probabilities
-		double[] prediction  = new double[9];  //{maxHomeResult1,maxAwayResult1,maxHomeResult2,maxAwayResult2,maxHomeResult3,maxAwayResult3}
+		double[] prediction  = new double[9];  //{maxHomeResult1,maxAwayResult1,maxHomeResult2,maxAwayResult2,maxHomeResult3,maxAwayResult3,home team win probability,draw probability,away team win probability }
 		
 		for(int i=0;i<prediction.length;i+=2) {
 			double probability = probabilities.poll();

@@ -12,10 +12,6 @@ public class Club {
 	public double awayGoals=0;
 	public double homeConceded=0;
 	public double awayConceded=0;
-	public double homeShotsOnTarget=0;
-	public double awayShotsOnTarget=0;
-	public double homeRedCards=0;
-	public double awayRedCards=0;
 	
 	public Club(String name) {
 		super();
@@ -31,11 +27,9 @@ public class Club {
 
 	@Override
 	public String toString() {
-		return "Club [name=" + name + ", homeMatchesPlayed=" + homeMatchesPlayed + ", awayMatchesPlayed="
-				+ awayMatchesPlayed + ", homeGoals=" + homeGoals + ", awayGoals=" + awayGoals + ", homeConceded="
-				+ homeConceded + ", awayConceded=" + awayConceded + ", homeShotsOnTarget=" + homeShotsOnTarget
-				+ ", awayShotsOnTarget=" + awayShotsOnTarget + ", homeRedCards=" + homeRedCards + ", awayRedCards="
-				+ awayRedCards + "]";
+		return name + "," + homeMatchesPlayed + ","
+				+ awayMatchesPlayed + "," + homeGoals + "," + awayGoals + ","
+				+ homeConceded + "," + awayConceded ;
 	}
 	
 	
