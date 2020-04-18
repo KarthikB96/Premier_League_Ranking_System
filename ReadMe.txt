@@ -1,3 +1,9 @@
+
+After cloning,
+include commons-math3-3.6.1.jar.
+select the Premier_League_Ranking_System, right click on the project -> buid path -> configure build path -> libraries
+-> Add Jars -> Select commons-math3-3.6.1/commons-math3-3.6.1.jar and apply.
+
 Steps to run the application.
 1. The Driver Class with the main function.
 2. All csv files are under the csv folder. Current Premier league table is in PremierLeague_Table.csv and the upcoming fixtures are in Fixtures.csv.
