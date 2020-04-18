@@ -1,7 +1,7 @@
 
 After cloning,
 include commons-math3-3.6.1.jar.
-select the Premier_League_Ranking_System, right click on the project -> buid path -> configure build path -> libraries
+In eclipse, select the Premier_League_Ranking_System, right click on the project -> buid path -> configure build path -> libraries
 -> Add Jars -> Select commons-math3-3.6.1/commons-math3-3.6.1.jar and apply.
 
 Steps to run the application.
